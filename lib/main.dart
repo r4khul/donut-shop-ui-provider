@@ -1,3 +1,4 @@
+import 'package:donut_app_ui/screens/home_screen.dart';
 import 'package:donut_app_ui/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home:SplashScreen()
+      home:HomeScreen()
     );
   }
 }
