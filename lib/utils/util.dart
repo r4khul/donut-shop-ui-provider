@@ -19,4 +19,7 @@ class Utils {
       'https://romanejaquez.github.io/flutter-codelab4/assets/donut_promo2.png';
   static const String donutPromo3 =
       'https://romanejaquez.github.io/flutter-codelab4/assets/donut_promo3.png';
+
+  static GlobalKey<NavigatorState> mainListNav = GlobalKey();
+  static GlobalKey<NavigatorState> mainAppNav = GlobalKey();
 }

@@ -37,9 +37,7 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     Future.delayed(Duration(seconds: 2), () {
-      Navigator.of(
-        context,
-      ).pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
+      Utils.mainAppNav.currentState!.pushReplacementNamed('/main');
     });
 
     return Scaffold(

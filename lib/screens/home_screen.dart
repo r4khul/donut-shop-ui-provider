@@ -15,15 +15,38 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Expanded(child: Container()),
-          AppBottomBar()
+          Expanded(
+            child: Navigator(
+              key: Utils.mainListNav,
+              initialRoute: '/main',
+              onGenerateRoute: (RouteSettings settings) {
+                Widget page;
+
+                switch (settings.name) {
+                  case '/main':
+                    page = Center(child: Text("main"));
+                  case '/favorites':
+                    page = Center(child: Text("favorites"));
+                  case '/shoppingcart':
+                    page = Center(child: Text("shoppingcart"));
+                  default:
+                    page = Center(child: Text("main"));
+                }
+
+                return PageRouteBuilder(
+                  pageBuilder: (_, __, ___) => page,
+                  transitionDuration: Duration(seconds: 0),
+                );
+              },
+            ),
+          ),
+          AppBottomBar(),
         ],
       ),
       drawer: _buildDrawer(),
     );
   }
 }
-
 
 Widget _buildDrawer() {
   return Drawer(
