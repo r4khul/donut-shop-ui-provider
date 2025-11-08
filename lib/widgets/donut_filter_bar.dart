@@ -38,10 +38,46 @@ class DonutFilterBar extends StatelessWidget {
                   );
                 }),
               ),
+              SizedBox(height: 10),
+              AnimatedAlign(
+                alignment: markAlignmentBasedOnSelection(
+                  id: provider.selectedDonutType!,
+                ),
+                duration: Duration(milliseconds: 100),
+                curve: Curves.easeInOutCirc,
+                child: Container(
+                  height: 3,
+                  width: MediaQuery.of(context).size.width / 3 - 20,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Utils.mainColor,
+                  ),
+                ),
+              )
             ],
           );
         },
       ),
     );
   }
+}
+
+Alignment markAlignmentBasedOnSelection({required String id}) {
+  final Alignment markAlign;
+
+  switch (id) {
+    case 'classic':
+      markAlign = Alignment.centerLeft;
+      break;
+    case 'sprinkled':
+      markAlign = Alignment.center;
+      break;
+    case 'stuffed':
+      markAlign = Alignment.centerRight;
+      break;
+    default:
+      markAlign = Alignment.centerLeft;
+  }
+
+  return markAlign;
 }
