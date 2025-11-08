@@ -11,19 +11,37 @@ class DonutList extends StatefulWidget {
 }
 
 class _DonutListState extends State<DonutList> {
-  final GlobalKey<AnimatedListState> _key = GlobalKey();
+  GlobalKey<AnimatedListState> _key = GlobalKey();
   List<DonutModel> insertedItems = [];
 
   @override
   void initState() {
     super.initState();
 
+    _populateListFromWidgetItems();
+  }
+
+  @override
+  void didUpdateWidget(covariant DonutList oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.donutItems != widget.donutItems) {
+      _key = GlobalKey<AnimatedListState>();
+      insertedItems = [];
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) _populateListFromWidgetItems();
+      });
+    }
+  }
+
+  void _populateListFromWidgetItems() {
     var future = Future(() {});
     for (var i = 0; i < widget.donutItems.length; i++) {
       future = future.then((_) {
         return Future.delayed(const Duration(milliseconds: 200), () {
+          if (!mounted) return;
           insertedItems.add(widget.donutItems[i]);
-          _key.currentState!.insertItem(i);
+          _key.currentState?.insertItem(i);
+          setState(() {});
         });
       });
     }

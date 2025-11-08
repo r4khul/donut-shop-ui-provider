@@ -21,7 +21,7 @@ class DonutFilterBar extends StatelessWidget {
                   return GestureDetector(
                     onTap: () {
                       provider.filterBySelectedDonutType(
-                        filterItems[index].id!,
+                        filterItems[index].id!
                       );
                     },
                     child: Text(
