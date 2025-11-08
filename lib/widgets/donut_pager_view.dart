@@ -2,15 +2,15 @@ import 'package:donut_app_ui/models/donut_pager.dart';
 import 'package:donut_app_ui/utils/util.dart';
 import 'package:flutter/material.dart';
 
-class MainPage extends StatefulWidget {
-  const MainPage({super.key});
+class DonutPagerView extends StatefulWidget {
+  const DonutPagerView({super.key});
 
   @override
-  State<MainPage> createState() => _MainPageState();
+  State<DonutPagerView> createState() => _DonutPagerViewState();
 }
 
-class _MainPageState extends State<MainPage> {
-  late final PageController _mainPageController;
+class _DonutPagerViewState extends State<DonutPagerView> {
+  late final PageController mainPageController;
   int currentPage = 0;
 
   final List<DonutPager> pages = [
@@ -22,12 +22,12 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     super.initState();
-    _mainPageController = PageController(initialPage: 0);
+    mainPageController = PageController(initialPage: 0);
   }
 
   @override
   void dispose() {
-    _mainPageController.dispose();
+    mainPageController.dispose();
     super.dispose();
   }
 
@@ -40,7 +40,7 @@ class _MainPageState extends State<MainPage> {
           SizedBox(
             height: 300,
             child: PageView.builder(
-              controller: _mainPageController,
+              controller: mainPageController,
               itemCount: pages.length,
               onPageChanged: (index) => setState(() => currentPage = index),
               itemBuilder: (context, index) {
@@ -68,8 +68,57 @@ class _MainPageState extends State<MainPage> {
               },
             ),
           ),
+          SizedBox(height: 10),
+          PageViewIndicator(
+            controller: mainPageController,
+            numberOfPages: pages.length,
+            currentPage: currentPage,
+          ),
         ],
       ),
+    );
+  }
+}
+
+class PageViewIndicator extends StatelessWidget {
+  final PageController controller;
+  final int numberOfPages;
+  final int currentPage;
+
+  const PageViewIndicator({
+    super.key,
+    required this.controller,
+    required this.numberOfPages,
+    required this.currentPage,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      spacing: 20,
+      children: List.generate(numberOfPages, (index) {
+        return GestureDetector(
+          onTap: () {
+            controller.animateToPage(
+              index,
+              duration: Duration(milliseconds: 400),
+              curve: Curves.linear,
+            );
+          },
+          child: AnimatedContainer(
+            duration: Duration(milliseconds: 300),
+            child: Container(
+              height: 15,
+              width: 15,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: currentPage == index ? Utils.mainColor : Colors.grey,
+              ),
+            ),
+          ),
+        );
+      }),
     );
   }
 }
