@@ -1,6 +1,7 @@
 import 'package:donut_app_ui/screens/home_screen.dart';
 import 'package:donut_app_ui/screens/splash_screen.dart';
 import 'package:donut_app_ui/services/bottom_bar_selection_service.dart';
+import 'package:donut_app_ui/services/filter_bar_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:donut_app_ui/utils/util.dart';
@@ -11,6 +12,9 @@ void main() {
       providers: [
         ChangeNotifierProvider(
           create: (context) => BottomBarSelectionService(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => FilterBarService(),
         ),
       ],
       child: MainApp(),
