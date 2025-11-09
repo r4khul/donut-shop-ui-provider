@@ -1,3 +1,4 @@
+import 'package:donut_app_ui/screens/donut_details_screen.dart';
 import 'package:donut_app_ui/screens/home_screen.dart';
 import 'package:donut_app_ui/screens/splash_screen.dart';
 import 'package:donut_app_ui/services/bottom_bar_selection_service.dart';
@@ -34,6 +35,7 @@ class MainApp extends StatelessWidget {
       routes: {
         '/': (context) => SplashScreen(),
         '/main': (context) => HomeScreen(),
+        '/details': (context) => DonutDetailsScreen(),
       },
     );
   }

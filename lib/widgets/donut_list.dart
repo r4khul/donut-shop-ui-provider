@@ -1,6 +1,8 @@
 import 'package:donut_app_ui/models/donut.dart';
+import 'package:donut_app_ui/services/filter_bar_service.dart';
 import 'package:donut_app_ui/widgets/donut_card.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class DonutList extends StatefulWidget {
   final List<DonutModel> donutItems;
@@ -64,7 +66,12 @@ class _DonutListState extends State<DonutList> {
             opacity: Tween(begin: 0.0, end: 1.0).animate(
               CurvedAnimation(parent: animation, curve: Curves.easeInOut),
             ),
-            child: DonutCard(donutInfo: donut),
+            child: GestureDetector(
+              onTap: () {
+                context.read<FilterBarService>().setDonutSelected(donut);
+              },
+              child: DonutCard(donutInfo: donut),
+            ),
           ),
         );
       },
