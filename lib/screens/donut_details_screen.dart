@@ -53,12 +53,15 @@ class _DonutDetailsScreenState extends State<DonutDetailsScreen>
             child: Stack(
               children: [
                 Positioned(
-                  child: RotationTransition(
-                    turns: _rotationAnimation,
-                    child: Image.network(
-                      donut.imgUrl!,
-                      fit: BoxFit.contain,
-                      width: MediaQuery.of(context).size.width * 1.25,
+                  child: Hero(
+                    tag: donut.name!,
+                    child: RotationTransition(
+                      turns: _rotationAnimation,
+                      child: Image.network(
+                        donut.imgUrl!,
+                        fit: BoxFit.contain,
+                        width: MediaQuery.of(context).size.width * 1.25,
+                      ),
                     ),
                   ),
                   right: -120,
