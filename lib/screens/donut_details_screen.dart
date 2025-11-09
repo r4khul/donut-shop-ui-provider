@@ -11,7 +11,32 @@ class DonutDetailsScreen extends StatefulWidget {
   State<DonutDetailsScreen> createState() => _DonutDetailsScreenState();
 }
 
-class _DonutDetailsScreenState extends State<DonutDetailsScreen> {
+class _DonutDetailsScreenState extends State<DonutDetailsScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _rotationAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 20),
+    )..repeat();
+
+    _rotationAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.linear));
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final DonutModel donut = context.read<FilterBarService>().selectedDonut;
@@ -28,10 +53,13 @@ class _DonutDetailsScreenState extends State<DonutDetailsScreen> {
             child: Stack(
               children: [
                 Positioned(
-                  child: Image.network(
-                    donut.imgUrl!,
-                    fit: BoxFit.contain,
-                    width: MediaQuery.of(context).size.width * 1.25,
+                  child: RotationTransition(
+                    turns: _rotationAnimation,
+                    child: Image.network(
+                      donut.imgUrl!,
+                      fit: BoxFit.contain,
+                      width: MediaQuery.of(context).size.width * 1.25,
+                    ),
                   ),
                   right: -120,
                   top: -40,
