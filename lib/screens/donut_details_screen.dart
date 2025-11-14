@@ -2,6 +2,7 @@ import 'package:donut_app_ui/models/donut.dart';
 import 'package:donut_app_ui/services/filter_bar_service.dart';
 import 'package:donut_app_ui/services/shopping_cart_service.dart';
 import 'package:donut_app_ui/utils/util.dart';
+import 'package:donut_app_ui/widgets/cart_badge.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -46,6 +47,7 @@ class _DonutDetailsScreenState extends State<DonutDetailsScreen>
         title: Image.network(Utils.donutLogoRedText, width: 150),
         centerTitle: true,
         foregroundColor: Utils.mainDark,
+        actions: [CartBadge()],
       ),
       body: Column(
         children: [
