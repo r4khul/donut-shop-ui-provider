@@ -1,5 +1,6 @@
 import 'package:donut_app_ui/models/donut.dart';
 import 'package:donut_app_ui/services/filter_bar_service.dart';
+import 'package:donut_app_ui/services/shopping_cart_service.dart';
 import 'package:donut_app_ui/utils/util.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -125,28 +126,55 @@ class _DonutDetailsScreenState extends State<DonutDetailsScreen>
                   ),
                   SizedBox(height: 16),
 
-                  InkWell(
-                    onTap: () {},
-                    splashFactory: InkSplash.splashFactory,
-                    child: Container(
-                      width: double.infinity,
-                      padding: EdgeInsets.symmetric(vertical: 8),
-                      decoration: BoxDecoration(
-                        color: Utils.mainColor.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: Row(
-                        spacing: 8,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.shopping_cart, color: Utils.mainDark),
-                          Text(
-                            'Add to Cart',
-                            style: TextStyle(color: Utils.mainDark),
+                  Consumer<ShoppingCartService>(
+                    builder: (context, provider, child) {
+                      if (!provider.findItem(donut)) {
+                        return InkWell(
+                          onTap: () {
+                            provider.addItem(donut);
+                          },
+                          splashFactory: InkSplash.splashFactory,
+                          child: Container(
+                            width: double.infinity,
+                            padding: EdgeInsets.symmetric(vertical: 8),
+                            decoration: BoxDecoration(
+                              color: Utils.mainColor.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            child: Row(
+                              spacing: 8,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.shopping_cart,
+                                  color: Utils.mainDark,
+                                ),
+                                Text(
+                                  'Add to Cart',
+                                  style: TextStyle(color: Utils.mainDark),
+                                ),
+                              ],
+                            ),
                           ),
-                        ],
-                      ),
-                    ),
+                        );
+                      }
+
+                      return Container(
+                        width: double.infinity,
+                        padding: EdgeInsets.symmetric(vertical: 8),
+                        child: Row(
+                          spacing: 8,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.check, color: Utils.mainDark),
+                            Text(
+                              'Added to Cart',
+                              style: TextStyle(color: Utils.mainDark),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
