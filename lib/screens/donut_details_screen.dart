@@ -1,4 +1,5 @@
 import 'package:donut_app_ui/models/donut.dart';
+import 'package:donut_app_ui/services/favorites_service.dart';
 import 'package:donut_app_ui/services/filter_bar_service.dart';
 import 'package:donut_app_ui/services/shopping_cart_service.dart';
 import 'package:donut_app_ui/utils/util.dart';
@@ -95,9 +96,13 @@ class _DonutDetailsScreenState extends State<DonutDetailsScreen>
                         ),
                       ),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          context.read<FavoritesService>().addItem(donut);
+                        },
                         icon: Icon(
-                          Icons.favorite_outline_outlined,
+                          context.watch<FavoritesService>().findItem(donut)
+                              ? Icons.favorite
+                              : Icons.favorite_outline_outlined,
                           color: Utils.mainDark,
                           size: 26,
                         ),

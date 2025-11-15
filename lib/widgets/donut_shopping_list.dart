@@ -1,11 +1,10 @@
 import 'package:donut_app_ui/models/donut.dart';
-import 'package:donut_app_ui/services/shopping_cart_service.dart';
 import 'package:donut_app_ui/widgets/donut_shopping_list_row.dart';
 import 'package:flutter/material.dart';
 
 class DonutShoppingList extends StatefulWidget {
   final List<DonutModel> donutCart;
-  final ShoppingCartService cartService;
+  final dynamic cartService;
   const DonutShoppingList({super.key, required this.donutCart, required this.cartService});
 
   @override

@@ -2,6 +2,7 @@ import 'package:donut_app_ui/screens/donut_details_screen.dart';
 import 'package:donut_app_ui/screens/home_screen.dart';
 import 'package:donut_app_ui/screens/splash_screen.dart';
 import 'package:donut_app_ui/services/bottom_bar_selection_service.dart';
+import 'package:donut_app_ui/services/favorites_service.dart';
 import 'package:donut_app_ui/services/filter_bar_service.dart';
 import 'package:donut_app_ui/services/shopping_cart_service.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,9 @@ void main() {
         ),
         ChangeNotifierProvider(
           create: (context) => ShoppingCartService()
+        ),
+        ChangeNotifierProvider(
+          create: (context) => FavoritesService()
         ),
       ],
       child: MainApp(),

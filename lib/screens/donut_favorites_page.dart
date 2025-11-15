@@ -1,17 +1,17 @@
-import 'package:donut_app_ui/services/shopping_cart_service.dart';
+import 'package:donut_app_ui/services/favorites_service.dart';
 import 'package:donut_app_ui/utils/util.dart';
 import 'package:donut_app_ui/widgets/donut_shopping_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class DonutShoppingCartPage extends StatefulWidget {
-  const DonutShoppingCartPage({super.key});
+class DonutFavoritesPage extends StatefulWidget {
+  const DonutFavoritesPage({super.key});
 
   @override
-  State<DonutShoppingCartPage> createState() => _DonutShoppingCartPageState();
+  State<DonutFavoritesPage> createState() => _DonutFavoritesPageState();
 }
 
-class _DonutShoppingCartPageState extends State<DonutShoppingCartPage>
+class _DonutFavoritesPageState extends State<DonutFavoritesPage>
     with SingleTickerProviderStateMixin {
   late AnimationController titleAnimation;
 
@@ -44,20 +44,20 @@ class _DonutShoppingCartPageState extends State<DonutShoppingCartPage>
                 curve: Curves.easeInCubic,
               ),
             ),
-            child: Image.network(Utils.donutTitleMyDonuts, width: 165),
+            child: Image.network(Utils.donutTitleFavorites, width: 165),
           ),
           Expanded(
-            child: Consumer<ShoppingCartService>(
+            child: Consumer<FavoritesService>(
               builder: (context, provider, child) {
                 if (provider.donuts.isEmpty) {
                   return Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.shopping_cart, size: 50, color: Colors.grey),
+                        Icon(Icons.favorite, size: 50, color: Colors.grey),
                         SizedBox(height: 20),
                         Text(
-                          "You don't have any items \n on your cart yet!",
+                          "You don't have any items \n on favorites yet!",
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Colors.grey, fontSize: 18),
                         ),
@@ -74,37 +74,12 @@ class _DonutShoppingCartPageState extends State<DonutShoppingCartPage>
             ),
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              context.watch<ShoppingCartService>().donuts.isNotEmpty
-                  ? 
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Total',
-                    style: TextStyle(
-                      color: Utils.mainColor,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                  Text(
-                    "\$${context.watch<ShoppingCartService>().getTotal().toStringAsFixed(2)}",
-                    style: TextStyle(
-                      color: Utils.mainDark,
-                      fontSize: 28,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-                    )
-                  : SizedBox(),
               FilledButton(
-                onPressed:
-                    context.watch<ShoppingCartService>().donuts.isNotEmpty
+                onPressed: context.watch<FavoritesService>().donuts.isNotEmpty
                     ? () {
-                        context.read<ShoppingCartService>().clearCart();
+                        context.read<FavoritesService>().clearCart();
                       }
                     : null,
                 style: ButtonStyle(
@@ -115,7 +90,7 @@ class _DonutShoppingCartPageState extends State<DonutShoppingCartPage>
                 child: Padding(
                   padding: EdgeInsetsGeometry.all(10),
                   child: Row(
-                    children: [Icon(Icons.delete_forever), Text("Clear Cart")],
+                    children: [Icon(Icons.delete_forever), Text("Clear Favorites")],
                   ),
                 ),
               ),

@@ -1,3 +1,4 @@
+import 'package:donut_app_ui/screens/donut_favorites_page.dart';
 import 'package:donut_app_ui/screens/donut_main_page.dart';
 import 'package:donut_app_ui/screens/donut_shopping_cart_page.dart';
 import 'package:donut_app_ui/utils/util.dart';
@@ -28,7 +29,7 @@ class HomeScreen extends StatelessWidget {
                   case '/main':
                     page = DonutMainPage();
                   case '/favorites':
-                    page = Center(child: Text("favorites"));
+                    page = DonutFavoritesPage();
                   case '/shoppingcart':
                     page = DonutShoppingCartPage();
                   default:
