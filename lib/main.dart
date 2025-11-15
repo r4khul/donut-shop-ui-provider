@@ -18,7 +18,9 @@ void main() {
         ChangeNotifierProvider(
           create: (context) => FilterBarService(),
         ),
-        ChangeNotifierProvider(create: (context) => ShoppingCartService())
+        ChangeNotifierProvider(
+          create: (context) => ShoppingCartService()
+        ),
       ],
       child: MainApp(),
     ),

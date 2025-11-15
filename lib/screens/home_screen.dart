@@ -1,4 +1,5 @@
 import 'package:donut_app_ui/screens/donut_main_page.dart';
+import 'package:donut_app_ui/screens/donut_shopping_cart_page.dart';
 import 'package:donut_app_ui/utils/util.dart';
 import 'package:donut_app_ui/widgets/app_bottom_bar.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,7 @@ class HomeScreen extends StatelessWidget {
                   case '/favorites':
                     page = Center(child: Text("favorites"));
                   case '/shoppingcart':
-                    page = Center(child: Text("shoppingcart"));
+                    page = DonutShoppingCartPage();
                   default:
                     page = Center(child: Text("main"));
                 }
